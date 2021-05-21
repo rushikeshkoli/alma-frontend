@@ -1,6 +1,7 @@
 import { Container, TableBody, TableCell, TableContainer, TableHead, TableRow, Table } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface HeadCell {
   id: number,
@@ -11,8 +12,11 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 1, numeric: false, disablePadding: true, label: "Name" },
-  { id: 2, numeric: true, disablePadding: false, label: "Total" },
-  { id: 3, numeric: true, disablePadding: false, label: "Percentage" }
+  { id: 2, numeric: false, disablePadding: true, label: "Maths" },
+  { id: 3, numeric: false, disablePadding: true, label: "Physics" },
+  { id: 4, numeric: false, disablePadding: true, label: "Chemistry" },
+  { id: 5, numeric: true, disablePadding: false, label: "Total" },
+  { id: 6, numeric: true, disablePadding: false, label: "Percentage" }
 ];
 
 const data = [
@@ -39,6 +43,17 @@ const data = [
 ];
 
 const Leaderboard = () => {
+  const [students, setStudents] = useState<any>([])
+
+  useEffect(() => {
+    async function fetchdata() {
+      const res = await axios.get('http://localhost:8000/api/leaderboard/')
+      console.log(res)
+      setStudents(res.data.scoreboard)
+    }
+    fetchdata()
+  }, [])
+
   return (
     <div>
       <Container>
@@ -57,10 +72,19 @@ const Leaderboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((student) => (
+              {students.map((student: any) => (
                 <TableRow>
                   <TableCell>
                     {student.name}
+                  </TableCell>
+                  <TableCell>
+                    {student.maths}
+                  </TableCell>
+                  <TableCell>
+                    {student.physics}
+                  </TableCell>
+                  <TableCell>
+                    {student.chemistry}
                   </TableCell>
                   <TableCell>
                     {student.total}
