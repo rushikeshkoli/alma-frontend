@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
+
+import Homepage from './Components/Homepage';
+import NewRecord from './Components/NewRecord';
+import Leaderboard from './Components/Leaderboard'
 import './App.css';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="border-solid border-4 border-light-blue-500">
+      <Router>
+        <Switch>
+          <Route exact path="/"><Homepage /></Route>
+          <Route exact path="/newrecord"><NewRecord /></Route>
+          <Route exact path="/leaderboard"><Leaderboard /></Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
