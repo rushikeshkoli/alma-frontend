@@ -41,7 +41,7 @@ const NewRecord = () => {
   const sendData = (e: FormEvent) => {
     e.preventDefault();
     console.log("submitted");
-    axios.post(`${process.env.REMOTE_HOST}/api/result/`, {
+    axios.post(`http://${process.env.REACT_APP_BACKEND_URL}/api/result/`, {
       'roll_no': rollNo,
       'name': name,
       'maths': mathsScore,

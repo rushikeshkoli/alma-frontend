@@ -132,7 +132,7 @@ const Leaderboard = () => {
   }
 
   async function fetchdata() {
-    const res = await axios.get(`${process.env.REMOTE_HOST}/api/leaderboard/`)
+    const res = await axios.get(`http://${process.env.REACT_APP_BACKEND_URL}/api/leaderboard/`)
     console.log(res.data.scoreboard)
     setStudents(res.data.scoreboard)
   }
@@ -153,6 +153,7 @@ const Leaderboard = () => {
   }, [order, orderBy])
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_BAKEND_URL)
     fetchdata()
   }, [])
 
